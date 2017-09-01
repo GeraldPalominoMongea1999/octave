@@ -63,9 +63,9 @@ function [pila,inicio] = quitarPila(pila, inicio )
 endfunction
 
 # retorna el siguente moviemto segun dijtrak 
-# 4 3 2
-# 5   1
-# 6 7 8
+# 6 5 4
+# 7   3
+# 8 1 2
 #distancia
 # 1.4  1  1.4
 #  1       1
@@ -128,3 +128,5 @@ function dir = direccion (ruta, o ,total)
     pause();
   endif
 endfunction
+#[ruta,pila]=dijkstra([5,5],15)
+#direccion(ruta,[10,7],15)
