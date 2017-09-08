@@ -32,30 +32,46 @@ function [r]=dj(theta,X,y,j)
   m=length(y);
   r=1/m*sum((h(theta,X)-y).*X(:,j));
 endfunction
-function [theta,historial]=entrenamiento(theta,X,y)
+function [theta,historial]=entrenamiento(theta,X,y,iteraciones,alpha)
   n=length(theta);
-  alpha=0.1;
+  #alpha=0.1;
   temp=theta*0;
-  historal=zeros(1,300);
-  for k=1:400
+  historial=[];
+  for k=1:iteraciones
    temp(1:n)=theta(1:n)-(alpha*dj(theta,X,y,1:n))';
    theta=temp;
-   historial(k)=j(theta,X,y);
+   historial=[historial ;j(theta,X,y)];
+   #if (k>iteraciones/4) && ((historial(k-1)-historial(k))<(0.02*historial(k)))
+   #  alpha=alpha*2;
+   #endif  
   endfor
 endfunction
-h([1:5]',([1:5; 2:6 ; 4:8;11:15 ]-7)/15);
-plot(h([1:5]',([1:5; 2:6 ; 4:8;11:15 ]-7)/15));
-theta=[1:10]'/10;
-X=rand(20,10)*200
-X=normalisacion(X)
-pause();
-h(theta,X)
-y=rand(20,1)
+#--------------------
+#pueba de funciones 
+
+#h([1:5]',([1:5; 2:6 ; 4:8;11:15 ]-7)/15);
+#plot(h([1:5]',([1:5; 2:6 ; 4:8;11:15 ]-7)/15));
+#theta=[1:10]'/10;
+#X=rand(20,10)*200
+#X=normalisacion(X)
+#pause();
+#h(theta,X)
+#y=rand(20,1)
+
+#----------------------
+
+
 #(1.-y).*log(1.-h(theta,X))
 #(-y).*log(h(theta,X)).-(1.-y).*log(1.-h(theta,X))
-j(theta,X,y)
-theta
-[theta,historial]=entrenamiento(theta,X,y)
-j(theta,X,y)
 
-plot(historial)
+#--------------------
+#pueba de funciones 
+
+#j(theta,X,y)
+#theta
+#[theta,historial]=entrenamiento(theta,X,y)
+#j(theta,X,y)
+
+#plot(historial)
+
+#----------------------
