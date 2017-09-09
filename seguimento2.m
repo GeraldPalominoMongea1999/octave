@@ -28,15 +28,43 @@ for iii=1:total2
      p=[p ; [iii jjj]];
   endfor
 endfor
-size(p)
+size(p);
+
+function x=generarX1(oo,p,media,desviacion)
+  a=(oo-p)(:,1);
+  b=(oo-p)(:,2);
+  x=[a b];
+  x=(x.-media)./desviacion;
+  x=[ones(length(a),1) x];
+endfunction
+
+
 x=generarX1(oo,p,media,desviacion);
-x2=[ones(total2*total2,1) h(theta1,x)]
+x2=[ones(total2*total2,1) h(theta1,x)];
 for kkk=1:8
-  subplot(2,4,kkk);
+  subplot(2,8,kkk);
   mapa=zeros(total2);
   for iii=1:(total2*total2)
     mapa(iii)=h(theta2(:,kkk),x2(iii,:));
   endfor
   mapa(oo(1),oo(2))=0.5;
-  imshow(mapa);
+  imshow(mapa');
 endfor  
+
+
+
+[ruta,pila]=dijkstra(oo,total2);
+for ii=1:(total2)
+  for jj=1:(total2)
+    if prod([ii,jj]!=oo)
+      mapa(ii,jj)=direccion(ruta,[ii,jj],total2);
+    else
+      mapa(ii,jj)=0.5;
+    endif
+  endfor
+endfor  
+
+for ii=1:8
+  subplot(2,8,ii+8);
+  imshow(mapa==ii);
+endfor
