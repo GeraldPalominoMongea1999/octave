@@ -1,10 +1,10 @@
 
-r=0;
-r=0;
-#p objetivo 
-#o inicio 
-
-
+#total=20;
+ma=zeros(total);
+p=round(rand(1,2)*(total-1))+1;
+o=round(rand(1,2)*(total-1))+1;
+#p=[5 9];
+#o=[ 8 5 ];
 #m retora las cooedenadas como el numero que corrspondria a un vector 
 function r=m(puntoVector,total)
   r=puntoVector(1)+(puntoVector(2)-1)*total; 
@@ -67,9 +67,9 @@ function [pila,inicio] = quitarPila(pila, inicio )
 endfunction
 
 # retorna el siguente moviemto segun dijtrak 
-# 6 5 4
-# 7   3
-# 8 1 2
+# 4 3 2
+# 5   1
+# 6 7 8
 #distancia
 # 1.4  1  1.4
 #  1       1
@@ -114,8 +114,6 @@ function [ruta,pila]= dijkstra(  p,total)
     # retorna un vector que represeta el camino desde un
     # punto a otro 
 endfunction
-# retorna la decicion correcta para una corrdenada dada (variable : o )
-# requiere haber ejecuado dijkstra  y guardado ruta 
 function dir = direccion (ruta, o ,total)
   alrededor=[1 0 ; 1 1 ; 0 1 ;  -1 1 ; -1 0 ; -1 -1 ; 0 -1 ; 1 -1   ];
   dir=0;
@@ -127,26 +125,19 @@ function dir = direccion (ruta, o ,total)
   endfor
   if dir==0
     printf("error no se enconctro la direecion");
-    o
-    ruta(2:3,m(o,total))
     pause();
   endif
 endfunction
-function dir = direccion2 (ruta, o ,total)
-  alrededor=[1 0 ; 1 1 ; 0 1 ;  -1 1 ; -1 0 ; -1 -1 ; 0 -1 ; 1 -1   ];
-  dir=0;
-  for i=1:8
-    if prod((alrededor(i,:)+o)(:)==(ruta(2:3,m(o,total)))(:))
-      dir=i;
-      i=9;
-    endif
-  endfor
-  if dir==0
-    printf("error no se enconctro la direecion");
-    o
-    ruta(2:3,m(o,total))
-    pause();
-  endif
-endfunction
-[ruta,pila]=dijkstra([10,10],20)
-#direccion(ruta,[10,7],15)
+
+
+# p es la meta
+[ruta,pila]=dijkstra(p,total);
+#k=zeros(total); k(:)=ruta(1,:);
+#imshow(k/max(max(k)))
+printf("estas en ");
+o 
+printf("el siguiente paso sera ");
+ruta(2:3,m(o,total))
+printf("direccion ");
+direccion(ruta,o,total)
+
